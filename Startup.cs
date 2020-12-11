@@ -34,7 +34,7 @@ namespace ProductMicroservice
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1.0", new OpenApiInfo { Title = "Products service", Version = "1.0" });
+                c.SwaggerDoc("v1.0", new OpenApiInfo { Title = "Product Microservice", Version = "1.0" });
             });
         }
 
@@ -52,7 +52,7 @@ namespace ProductMicroservice
 
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1.0/swagger.json", "PgList (V 1.0)");
+                c.SwaggerEndpoint("/swagger/v1.0/swagger.json", "ProductItems (V 1.0)");
             });
 
             app.UseRouting();

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ProductMicroservice.Models;
 using ProductMicroservice.Provider;
 using System;
 using System.Collections.Generic;
@@ -12,23 +13,23 @@ namespace ProductMicroservice.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
-        private readonly IProvider prodprovider;
+        private readonly IProvider prodProvider;
         static readonly log4net.ILog _log4net = log4net.LogManager.GetLogger(typeof(ProductController));
         public ProductController(IProvider _prodProvider)
         {
 
-            prodprovider = _prodProvider;
+            prodProvider = _prodProvider;
         }
 
         [HttpGet]
         [Route("searchProductById/{prod_id}")]
-        public IActionResult searchProductById(int prod_id)
+        public IActionResult SearchProductById(int prod_id)
         {
 
 
             _log4net.Info(" Http GET in controller is accesed");
 
-            var result = prodprovider.searchProductById(prod_id);
+            var result = prodProvider.SearchProductById(prod_id);
             _log4net.Info("method execution in controller completed");
 
             if (result == null)
@@ -43,13 +44,13 @@ namespace ProductMicroservice.Controllers
         }
         [HttpGet]
         [Route("searchProductByName/{prod_name}")]
-        public IActionResult searchProductByName(string prod_name)
+        public IActionResult SearchProductByName(string prod_name)
         {
 
 
             _log4net.Info(" Http GET in controller is accesed");
 
-            var result = prodprovider.searchProductByName(prod_name);
+            var result = prodProvider.SearchProductByName(prod_name);
             _log4net.Info("method execution in controller completed");
 
             if (result == null)
@@ -63,9 +64,9 @@ namespace ProductMicroservice.Controllers
 
         }
         [HttpPost]
-        public IActionResult addProductRating(int prod_id,[FromBody] int rating)
+        public IActionResult AddProductRating(ProductRatingViewModel model)
         {
-            var res = prodprovider.addProductRating(prod_id, rating);
+            var res = prodProvider.AddProductRating(model);
             _log4net.Info("method execution in controller completed");
 
             if (res == false)
@@ -73,7 +74,7 @@ namespace ProductMicroservice.Controllers
                 _log4net.Info("method returns a null value");
                 return NotFound();
             }
-            _log4net.Info("rating "+rating+ " for the product with id=" + prod_id + " is assigned");
+            _log4net.Info("rating "+model.Rating+ " for the product with id=" + model.ProdId + " is assigned");
             return Ok(res);
         }
     }

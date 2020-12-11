@@ -16,12 +16,12 @@ namespace ProductMicroservice.Provider
         {
             this._prodRepo = prodRepository;
         }
-        public Product searchProductById(int prod_id)
+        public ProductDto SearchProductById(int prod_id)
         {
             try
             {
                 _log4net.Info("Product details have been successfully recieved.");
-                return _prodRepo.searchProductById(prod_id);
+                return _prodRepo.SearchProductById(prod_id);
 
             }
             catch (Exception e)
@@ -30,12 +30,12 @@ namespace ProductMicroservice.Provider
                 throw e;
             }
         }
-        public Product searchProductByName(string prod_name)
+        public ProductDto SearchProductByName(string prod_name)
         {
             try
             {
                 _log4net.Info("Product details have been successfully recieved.");
-                return _prodRepo.searchProductByName(prod_name);
+                return _prodRepo.SearchProductByName(prod_name);
 
             }
             catch (Exception e)
@@ -44,12 +44,12 @@ namespace ProductMicroservice.Provider
                 throw e;
             }
         }
-        public bool addProductRating(int prod_id, int rating)
+        public bool AddProductRating(ProductRatingViewModel model)
         {
             try
             {
                 _log4net.Info("Rating has been successfully assigned to the product.");
-                return _prodRepo.addProductRating(prod_id, rating);
+                return _prodRepo.AddProductRating(model);
             }
             catch (Exception e)
             {

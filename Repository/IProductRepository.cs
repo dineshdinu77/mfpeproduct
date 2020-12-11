@@ -8,8 +8,8 @@ namespace ProductMicroservice.Repository
 {
     public interface IProductRepository
     {
-        public Product searchProductById(int Product_Id);
-        public Product searchProductByName(string Product_Name);
-        public bool addProductRating(int prod_id,int rating);
+        public ProductDto SearchProductById(int Product_Id);
+        public ProductDto SearchProductByName(string Product_Name);
+        public bool AddProductRating(ProductRatingViewModel model);
     }
 }
